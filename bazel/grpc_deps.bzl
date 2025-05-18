@@ -94,12 +94,16 @@ def grpc_deps():
         # bazel run @com_google_fuzztest//bazel:setup_configs > tools/fuzztest.bazelrc
         http_archive(
             name = "com_google_fuzztest",
-            sha256 = "cdf8d8cd3cdc77280a7c59b310edf234e489a96b6e727cb271e7dfbeb9bcca8d",
-            strip_prefix = "fuzztest-4ecaeb5084a061a862af8f86789ee184cd3d3f18",
+            sha256 = "51539848c89788218059820a1c5b5755a00695a94137aa3fbfd973e9a962b11a",
+            strip_prefix = "fuzztest-80a80cba32a391af7e969a116ef2317f8f6cecd2",
             urls = [
                 # 2023-05-16
-                "https://github.com/google/fuzztest/archive/4ecaeb5084a061a862af8f86789ee184cd3d3f18.tar.gz",
+                "https://github.com/google/fuzztest/archive/80a80cba32a391af7e969a116ef2317f8f6cecd2.tar.gz",
             ],
+            repo_mapping = {
+                "@googletest": "@com_google_googletest",
+                "@abseil-cpp": "@com_google_absl",
+            },
         )
 
     if "rules_cc" not in native.existing_rules():
@@ -151,11 +155,11 @@ def grpc_deps():
     if "com_google_absl" not in native.existing_rules():
         http_archive(
             name = "com_google_absl",
-            sha256 = "b396401fd29e2e679cace77867481d388c807671dc2acc602a0259eeb79b7811",
-            strip_prefix = "abseil-cpp-20250127.1",
+            sha256 = "7262daa7c1711406248c10f41026d685e88223bc92817d16fb93c19adb57f669",
+            strip_prefix = "abseil-cpp-20250512.0",
             urls = [
-                "https://storage.googleapis.com/grpc-bazel-mirror/github.com/abseil/abseil-cpp/releases/download/20250127.1/abseil-cpp-20250127.1.tar.gz",
-                "https://github.com/abseil/abseil-cpp/releases/download/20250127.1/abseil-cpp-20250127.1.tar.gz",
+                "https://storage.googleapis.com/grpc-bazel-mirror/github.com/abseil/abseil-cpp/releases/download/20250512.0/abseil-cpp-20250512.0.tar.gz",
+                "https://github.com/abseil/abseil-cpp/releases/download/20250512.0/abseil-cpp-20250512.0.tar.gz",
             ],
             repo_mapping = {
                 "@googletest": "@com_google_googletest",

@@ -425,7 +425,7 @@ MessageHandle TestMessage(SliceBuffer payload, const uint32_t flags) {
 }
 
 // Encoded string of header ":path: /demo.Service/Step".
-static const std::vector<uint8_t> kPathDemoServiceStep = {
+const std::vector<uint8_t> kPathDemoServiceStep = {
     0x40, 0x05, 0x3a, 0x70, 0x61, 0x74, 0x68, 0x12, 0x2f,
     0x64, 0x65, 0x6d, 0x6f, 0x2e, 0x53, 0x65, 0x72, 0x76,
     0x69, 0x63, 0x65, 0x2f, 0x53, 0x74, 0x65, 0x70};
@@ -490,7 +490,7 @@ void EnqueueHalfClosedAndCheckSuccess(
 }
 
 template <typename MetadataHandle>
-static void DequeueAndCheckSuccess(
+void DequeueAndCheckSuccess(
     RefCountedPtr<StreamDataQueue<MetadataHandle>> queue,
     std::vector<Http2Frame> expected_frames, const uint32_t max_tokens = 10,
     const uint32_t max_frame_length = 10) {
@@ -505,7 +505,7 @@ static void DequeueAndCheckSuccess(
 }
 
 template <typename MetadataHandle>
-static void DequeueMessageAndCheckSuccess(
+void DequeueMessageAndCheckSuccess(
     RefCountedPtr<StreamDataQueue<MetadataHandle>> queue,
     std::vector<int> expected_frames_length, const uint32_t max_tokens = 10,
     const uint32_t max_frame_length = 10) {

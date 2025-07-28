@@ -131,7 +131,6 @@ class SimpleQueue {
 
   bool IsEmpty() const { return queue_.empty(); }
 
- private:
   struct Entry {
     T data;
     uint32_t tokens;

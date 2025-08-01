@@ -38,7 +38,8 @@ class Lows {
     kDefault,
     kMax
   };
-  Lows(const uint32_t max_queue_size = std::numeric_limits<uint32_t>::max())
+  explicit Lows(
+      const uint32_t max_queue_size = std::numeric_limits<uint32_t>::max())
       : queue_(max_queue_size) {}
   auto Enqueue(const uint32_t stream_id, const StreamPriority priority) {
     return Map(

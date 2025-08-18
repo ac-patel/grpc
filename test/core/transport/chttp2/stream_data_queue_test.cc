@@ -428,7 +428,8 @@ void EnqueueInitialMetadataAndCheckSuccess(
     MetadataHandle&& metadata, const bool expected_writeable_state,
     const WritableStreams::StreamPriority expected_priority) {
   LOG(INFO) << "Enqueueing initial metadata";
-  auto promise = queue->EnqueueInitialMetadata(std::move(metadata));
+  auto promise =
+      queue->EnqueueInitialMetadata(std::forward<MetadataHandle>(metadata));
   auto result = promise();
   EXPECT_TRUE(result.ready());
   EXPECT_TRUE(result.value().ok());
@@ -443,7 +444,8 @@ void EnqueueTrailingMetadataAndCheckSuccess(
     MetadataHandle&& metadata, const bool expected_writeable_state,
     const WritableStreams::StreamPriority expected_priority) {
   LOG(INFO) << "Enqueueing trailing metadata";
-  auto promise = queue->EnqueueTrailingMetadata(std::move(metadata));
+  auto promise =
+      queue->EnqueueTrailingMetadata(std::forward<MetadataHandle>(metadata));
   auto result = promise();
   EXPECT_TRUE(result.ready());
   EXPECT_TRUE(result.value().ok());

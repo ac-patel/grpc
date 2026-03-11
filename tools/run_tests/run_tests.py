@@ -415,10 +415,14 @@ class CLanguage(object):
                             test = line.strip()
                             if not test:
                                 continue
-                            cmdline = [
-                                binary,
-                                "--benchmark_filter=%s$" % test,
-                            ] + target["args"] + self.args.script_args
+                            cmdline = (
+                                [
+                                    binary,
+                                    "--benchmark_filter=%s$" % test,
+                                ]
+                                + target["args"]
+                                + self.args.script_args
+                            )
                             out.append(
                                 self.config.job_spec(
                                     cmdline,
@@ -454,10 +458,14 @@ class CLanguage(object):
                                 assert base is not None
                                 assert line[1] == " "
                                 test = base + line.strip()
-                                cmdline = [
-                                    binary,
-                                    "--gtest_filter=%s" % test,
-                                ] + target["args"] + self.args.script_args
+                                cmdline = (
+                                    [
+                                        binary,
+                                        "--gtest_filter=%s" % test,
+                                    ]
+                                    + target["args"]
+                                    + self.args.script_args
+                                )
                                 out.append(
                                     self.config.job_spec(
                                         cmdline,
@@ -473,7 +481,9 @@ class CLanguage(object):
                                     )
                                 )
                     else:
-                        cmdline = [binary] + target["args"] + self.args.script_args
+                        cmdline = (
+                            [binary] + target["args"] + self.args.script_args
+                        )
                         shortname = target.get(
                             "shortname",
                             " ".join(shlex.quote(arg) for arg in cmdline),
@@ -693,7 +703,8 @@ class PythonLanguage(object):
                         [
                             python_config.python_path,
                             "py_xds_protos/generated_file_import_test.py",
-                        ] + self.args.script_args,
+                        ]
+                        + self.args.script_args,
                         timeout_seconds=60,
                         environ=_FORCE_ENVIRON_FOR_WRAPPERS,
                         shortname=f"{python_config.name}.xds_protos",
@@ -717,7 +728,8 @@ class PythonLanguage(object):
                     [
                         self.config.job_spec(
                             python_config.run
-                            + [self._TEST_COMMAND[io_platform]] + self.args.script_args,
+                            + [self._TEST_COMMAND[io_platform]]
+                            + self.args.script_args,
                             timeout_seconds=10 * 60,
                             environ=dict(
                                 GRPC_PYTHON_TESTRUNNER_FILTER=str(test_case),
@@ -1101,7 +1113,8 @@ class CSharpLanguage(object):
                     cmdline = (
                         runtime_cmd
                         + [assembly_file, "--test=%s" % test]
-                        + nunit_args + self.args.script_args
+                        + nunit_args
+                        + self.args.script_args
                     )
                     specs.append(
                         self.config.job_spec(
@@ -1157,7 +1170,8 @@ class ObjCLanguage(object):
         out = []
         out.append(
             self.config.job_spec(
-                ["src/objective-c/tests/build_one_example.sh"] + self.args.script_args,
+                ["src/objective-c/tests/build_one_example.sh"]
+                + self.args.script_args,
                 timeout_seconds=60 * 60,
                 shortname="ios-buildtest-example-sample",
                 cpu_cost=1e6,
@@ -1170,7 +1184,8 @@ class ObjCLanguage(object):
         # TODO(jtattermusch): Create bazel target for the sample and remove the test task from here.
         out.append(
             self.config.job_spec(
-                ["src/objective-c/tests/build_one_example.sh"] + self.args.script_args,
+                ["src/objective-c/tests/build_one_example.sh"]
+                + self.args.script_args,
                 timeout_seconds=60 * 60,
                 shortname="ios-buildtest-example-switftsample",
                 cpu_cost=1e6,
@@ -1182,7 +1197,8 @@ class ObjCLanguage(object):
         )
         out.append(
             self.config.job_spec(
-                ["src/objective-c/tests/build_one_example.sh"] + self.args.script_args,
+                ["src/objective-c/tests/build_one_example.sh"]
+                + self.args.script_args,
                 timeout_seconds=60 * 60,
                 shortname="ios-buildtest-example-switft-use-frameworks",
                 cpu_cost=1e6,
